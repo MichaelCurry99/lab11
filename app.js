@@ -7,8 +7,11 @@ let maxClicks = 25;
 // this array is going to hold
 let productNames = ['bag','banana','bathroom','boots'];
 let totalClicks = 0;
+
+
 // Create an algorithm that will randomly generate three unique product images from the images directory and display them side-by-side-by-side in the browser window.
 // an algorithm is a step list of instructions to be executed.
+// this is a constructor it makes objects
 function Product(name,path){
     // Name of the product
     // File path of image
@@ -20,6 +23,7 @@ function Product(name,path){
     this.trackClicks
     allProducts.push(this);
     }
+    
     // Product.trackClicks = function(){
     //     console.log('you clicked image' + this.name);
     //     }
@@ -58,16 +62,28 @@ function constructImages(){
     img_one.setAttribute('alt',bag.name);
     img_two.setAttribute('alt',banana.name);
 
+
+    
+   
+    // trackClicks(banana)
     img_one.addEventListener('click',function(){
-     trackClicks(bag)
-     trackClicks(banana)
-    });
-    img_two.addEventListener('click',function(){trackClicks(banana)});
+    trackClicks(bag)
     timeShown(bag)
+
+    });
+    img_two.addEventListener('click',function(){
+        trackClicks(banana);
+        timesShown(banana)
+    });
+    
+
     }
-    function trackClicks (e){
-        console.log('you clicked on '+ productNames.length);
-    }
+    
+    
+    // function trackClicks (e){
+    //     console.log('you clicked on '+ productNames.length);
+    // }
+
     constructImages()
 
     // make a function to randomly display images
@@ -75,6 +91,7 @@ function constructImages(){
 
        // this function needs to call the randomizer algorithm
     }
+    
     
 // make a function to keep track of the times a certain object was clicked
 function trackClicks(product){
@@ -85,7 +102,7 @@ function trackClicks(product){
 
 // IF the object is clicked ->
 // check the timeClicked property against the max clicks
-if(product.timeClicked < 25){
+if(product.timesClicked < 25){
 // THEN increase the value of timesClicked by one per click
 product.timesClicked++
 console.log(product.timesClicked)
@@ -119,6 +136,7 @@ for(let i=0;i<productsArray.length;i++){
     console.log('you can find this product at : ' + product.path + '!!!')
 }
 }
+
 
 function showResults () {
     if(totalClicks === maxClicks){
