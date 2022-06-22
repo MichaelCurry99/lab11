@@ -7,7 +7,11 @@ let maxClicks = 25;
 // this array is going to hold
 let productNames = ['bag','banana','bathroom','boots'];
 let totalClicks = 0;
+let timesClicked = [];
 
+// this array holds number of times clicked
+
+// to do. make a times clicked array. push 3 clicks inside images inside the array.
 
 // Create an algorithm that will randomly generate three unique product images from the images directory and display them side-by-side-by-side in the browser window.
 // an algorithm is a step list of instructions to be executed.
@@ -39,6 +43,7 @@ const imageContainer = document.getElementById('image-container');
 const resultContainer = document.getElementById('results');
 let img_one = document.querySelector('#image-container img:first-child')
 let img_two = document.querySelector('#image-container img:nth-child(2)')
+let img_three = document.querySelector('#image-container img:nth-child(3)')
 let resultsButton = document.getElementById('results-button')
 
 // instance variable -> Objects
@@ -48,6 +53,7 @@ function constructImages(){
 
     let bag = new Product('bag','./assets/bag.jpg');
     let banana = new Product('banana','./assets/banana.jpg');
+    let bathroom = new Product('bathroom','./assets/bathroom.jpg');
     // let bag0 = new Product(productNames(0),'./assets' + productNames(0) + '.png' )
 
 
@@ -59,8 +65,10 @@ function constructImages(){
 
     img_one.setAttribute('src',bag.path);
     img_two.setAttribute('src',banana.path);
+    img_three.setAttribute('src',bathroom.path);
     img_one.setAttribute('alt',bag.name);
     img_two.setAttribute('alt',banana.name);
+    img_three.setAttribute('alt',bathroom.name);
 
 
     
@@ -73,9 +81,14 @@ function constructImages(){
     });
     img_two.addEventListener('click',function(){
         trackClicks(banana);
-        timesShown(banana)
+        timesShown(banana);
     });
     
+    img_three.addEventListener('click',function(){
+        trackClicks(bathroom);
+        timeShown(bathroom);
+    
+    });
 
     }
     
@@ -108,6 +121,7 @@ product.timesClicked++
 console.log(product.timesClicked)
 }
 else{
+     timesClicked.push(bag.timesClicked, banana.timesClicked, bathroom.timesClicked, boots.timesClicked);
     alert('too many clicks')
 }
 }
@@ -130,7 +144,7 @@ for(let i=0;i<productsArray.length;i++){
     product = productsArray[i]
     // console.log(product)
     // let resultMessage =
-    console.log('this product was clicked'+product.time)
+    console.log('this product was clicked'+ product.time)
     console.log('this product was shown' + product.timeShown + 'times')
     console.log('this product is called' + product.name )             // ${}
     console.log('you can find this product at : ' + product.path + '!!!')
@@ -143,6 +157,50 @@ function showResults () {
         displayResults(allProducts)
     }
 }
+
+let canvas = document.getElementById('myChart');
+  
+// next we need to create a chart.
+const ctx = canvas.getContext('2d'); // making an object to draw 2d!
+
+// This is my chart!!
+const myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+      labels: productNames, // pass array to our label data! 
+      datasets: [{
+          label: '# of Clicks',
+          data: totalClicks, // Has to match the label data!!
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+      }]
+  },
+  options: {
+      scales: {
+          y: {
+              beginAtZero: true
+          }
+      }
+  }
+});
+
+
+
 
 displayResults(allProducts)
 
