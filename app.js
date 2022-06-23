@@ -204,4 +204,4 @@ const myChart = new Chart(ctx, {
 
 displayResults(allProducts)
 
-constructImages()
+constructImages() 
